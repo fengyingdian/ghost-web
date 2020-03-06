@@ -1,0 +1,24 @@
+$bg-color: #f0f0f0;
+
+.loading {
+  composes: square-spin from 'loaders.css/loaders.css';
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $bg-color;
+  text-align: center;
+  
+  .loading-icon {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 60px;
+    margin-top: -30px;
+    border: none;
+    background: none;
+    text-align: center;
+  }
+}

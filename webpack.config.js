@@ -1,11 +1,12 @@
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackplugin=require('html-webpack-plugin');
+// const webpack = require('webpack');
+// const nodeExternals = require('webpack-node-externals');
+const HtmlWebpackplugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    pageA: './src/pageA/index',
-    pageB: './src/pageB/index',
+    pageA: './src/staticserver/pageA/index',
+    pageB: './src/staticserver/pageB/index',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -13,29 +14,35 @@ module.exports = {
   },
   module: {
     rules: [
+      // suport react components
       {
+        use: 'babel-loader',
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
-      }
-    ]
+        resolve: { extensions: ['.js', '.jsx'] },
+      },
+      {
+        use: ['style-loader', 'css-loader'],
+        test: /\.css$/,
+      },
+    ],
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
   plugins: [
     new HtmlWebpackplugin({
-      template: './src/pageA/index.html',
+      template: './src/staticserver/pageA/index.html',
       filename: './pageA/index.html',
       chunks: ['pageA'],
       hash: true,
       minify: {
         // collapseWhitespace: true,
         removeAttributeQuotes: true,
-      }
+      },
     }),
     new HtmlWebpackplugin({
-      template: './src/pageB/index.html',
+      template: './src/staticserver/pageB/index.html',
       filename: './pageB/index.html',
       chunks: ['pageB'],
       hash: true,
@@ -43,11 +50,12 @@ module.exports = {
         // collapseWhitespace: true,
         removeAttributeQuotes: true,
       },
-    })
+    }),
   ],
   devServer: {
     contentBase: './dist',
     port: '3000',
   },
-  resolve: {},
-}
+  // externals: [ nodeExternals() ],
+  // resolve: {},
+};

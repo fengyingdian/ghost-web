@@ -17,16 +17,19 @@ const Inner = styled.p`
   color: #fff;
 `;
 
-export class App extends Component {
+export default class PageSample extends Component {
   state = {};
 
-  render () {
-    return (
+  render() {
+    const { title = '' } = this.props;
+
+return (
       <Container>
-        <Inner> {'Page B'}</Inner>
+        <Inner>
+{' '}
+{title}
+        </Inner>
       </Container>
-    )
+    );
   }
 }
-
-export default App;
