@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     pageA: './src/staticserver/pageA/index',
     pageB: './src/staticserver/pageB/index',
+    profile: './src/staticserver/profile/index',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -45,6 +46,16 @@ module.exports = {
       template: './src/staticserver/pageB/index.html',
       filename: './pageB/index.html',
       chunks: ['pageB'],
+      hash: true,
+      minify: {
+        // collapseWhitespace: true,
+        removeAttributeQuotes: true,
+      },
+    }),
+    new HtmlWebpackplugin({
+      template: './src/staticserver/profile/index.html',
+      filename: './profile/index.html',
+      chunks: ['profile'],
       hash: true,
       minify: {
         // collapseWhitespace: true,
